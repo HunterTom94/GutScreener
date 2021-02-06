@@ -110,7 +110,7 @@ def schedule_exe(schedule_matrix, port_ls, reset=0):
 
 
 if __name__ == "__main__":
-    excel = pd.read_excel('Scheme.xlsx', header=None, index_col=0).iloc[:3,:].astype('int16')
+    excel = pd.read_excel('Schedule.xlsx', header=None, index_col=0).iloc[:3,:].astype('int16')
     schedule_matrix = excel2schedule(excel)
 
     schedule_exe(schedule_matrix, port_ls, reset=reset)

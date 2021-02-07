@@ -56,7 +56,6 @@ port_ls = [valve_1_port, valve_2_port, valve_3_port, valve_4_port, valve_5_port,
 def excel2schedule(excel):
     total_time = excel.iloc[1,:].sum()
     schedule = np.zeros((24, total_time*schedule_resolution_factor))
-    schedule[-1, :] = schedule[0:-2].any(axis=0).astype('uint8')
 
     signal_hold = 0.01
     assert camera_sampling_rate > signal_hold, 'Frame Rate Too High!'
@@ -78,6 +77,9 @@ def excel2schedule(excel):
             schedule[-2, cum_time*schedule_resolution_factor:(cum_time+span)*schedule_resolution_factor] = 0
 
         cum_time += span
+
+    schedule[-1, :] = schedule[0:-2].any(axis=0).astype('uint8')
+    schedule = schedule.astype('uint8')
     return schedule
 
 def schedule_exe(schedule_matrix, port_ls, reset=0):

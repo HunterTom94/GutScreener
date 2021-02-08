@@ -91,7 +91,7 @@ def schedule_exe(schedule_matrix, port_ls, reset=0):
         channel_ls += ', {}'.format(valve_port_str)
         print('{} online'.format(valve_port_str))
 
-    mask = np.zeros(schedule_matrix.shape)
+    mask = np.zeros(schedule_matrix.shape, dtype='uint8')
     mask[signal_ls, :] = 1
     schedule_matrix *= mask
 
